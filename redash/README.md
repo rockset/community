@@ -8,7 +8,7 @@ First install Docker by following the guides for
 * [Mac](https://docs.docker.com/docker-for-mac/install/)
 * [Windows](https://docs.docker.com/docker-for-windows/install/)
 
-Then install docker-compose by following this [guide]((https://docs.docker.com/compose/install/)).
+Then install docker-compose by following this [guide](https://docs.docker.com/compose/install/).
 
 Next, in your terminal run
 
