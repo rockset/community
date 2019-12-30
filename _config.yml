@@ -4,7 +4,7 @@
 title: Rockset Community
 
 # Short description of your site
-description: Rockset is a real-time datastore built for the cloud. This repository is used to track community contributions, feature requests, roadmaps, known issues + workarounds, talks, etc.
+description: GitHub repo to track Rockset community contributions.
 
 # --- Local development options ---
 # If your website is hosted locally rather than on GitHub, then you need to uncomment the next two parameters to set the url and baseurl
