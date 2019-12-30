@@ -188,3 +188,5 @@ plugins:
   - jekyll-sitemap
 
 # theme: jekyll-theme-slate
+
+theme: jekyll-theme-slate
