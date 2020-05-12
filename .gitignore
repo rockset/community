@@ -66,3 +66,7 @@ typings/
 
 # next.js build output
 .next
+
+# tutorials
+community/tutorials/rockset-mongo-integration/__pycache__
+community/tutorials/rockset-mongo-integration/.DS_Store
