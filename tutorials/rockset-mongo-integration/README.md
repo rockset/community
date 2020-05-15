@@ -38,7 +38,7 @@ If you completes all 3 challenges $800 in rockset credit, hoodie, and a [bose so
 
 To submit, share your challenge in the [slack channel](http://bit.ly/rockset-community-channel) in *#mongodb*.
 
-*Deadline: June 15, 2020*
+**Deadline: June 15, 2020**
 
 Check out below to see the status of the challenge or reach out for questions in our slack channel. The first 3 people to submit will win the appropriate prize.
 
@@ -46,6 +46,6 @@ Check out below to see the status of the challenge or reach out for questions in
 Open
 
 ## Resources
-- For questions about the tutorial or the challenges find us on [slack](https://bit.ly/rockset-channel) on  **#support** channel or **#mongo**.
+- For questions about the tutorial or the challenges find us on [slack](https://bit.ly/rockset-channel) on  **#support** channel or **#mongodb**.
 - Follow us on Twitter: [Rockset]([https://twitter.com/RocksetCloud](https://twitter.com/RocksetCloud)).
 - Check out our [YouTube channel]([https://www.youtube.com/channel/UCy4qLzJ7yuEmsIN2Mm5Pn-w](https://www.youtube.com/channel/UCy4qLzJ7yuEmsIN2Mm5Pn-w)) for tutorials.  We'll be making one for this integration, so stay tuned!
