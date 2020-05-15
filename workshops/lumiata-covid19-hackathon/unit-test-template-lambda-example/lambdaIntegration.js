@@ -1,7 +1,7 @@
 "use strict";
 
 const API_KEY = "YOUR API KEY";
-const COLLECTION_NAME = "workshopDemoPrep";
+const COLLECTION_NAME = "workshopDemoPrep03";
 
 const rockset = require("rockset").default(
   API_KEY,

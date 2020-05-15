@@ -1,5 +1,5 @@
 # Rockset-MongoDB Integration Sample App
-Rockset has  a built-in data source connector to [Mongo DB]([https://www.mongodb.com/](https://www.mongodb.com/)).  By using Rockset on top of Mongo DB, you can build APIs to the SQL you write, have millisecond query latency, and seconds in data latency. To get a quick overview of what this integration looks like, check out this [YouTube video](https://www.youtube.com/watch?v=eivdshBA-6g&t=1s).
+Rockset has  a built-in data source connector to [Mongo DB]([https://www.mongodb.com/](https://www.mongodb.com/)).  By using Rockset on top of Mongo DB, you can build APIs to the SQL you write, have millisecond query latency, and seconds in data latency. To get a quick overview of what this integration looks like, check out this [YouTube video]([https://www.youtube.com/watch?v=eivdshBA-6g&t=1s](https://www.youtube.com/watch?v=eivdshBA-6g&t=1s).
 
 Here's a sample diagram of how the Rockset-MongoDB integration looks like:
 ![Rockset-MongoDB Diagram](mongo_horizontal_bgcolor_2x.png)
@@ -23,9 +23,29 @@ This project consists of a few files:
 4. Make sure your databases and collections are set up on Mongo DB.
 5. Run `$ python script.py`
 
+## Challenge
+- 1st challenge: So far, we’ve only considered PM10 in our queries. What would this look like for O3 and weather data?
+- 2nd challenge: If we wanted to see the average humidity and PM10 and O3 levels, what would that look like?
+- 3rd challenge: If you were going to predict how weather and humidity effects PM10 and O3, what would that look like?
+
+If you completes challenges 1 or 2: $100 in rockset credit plus t-shirt
+
+If you completes challenges 1 and 2: $250  in rockset credit plus t-shirt
+
+If you completes challenge 3: $500 in rockset credit, hoodie, and a [bose soundlink](https://www.bose.com/en_us/products/speakers/portable_speakers/soundlink-micro.html#v=soundlink_micro_black)
+
+If you completes all 3 challenges $800 in rockset credit, hoodie, and a [bose soundlink](https://www.bose.com/en_us/products/speakers/portable_speakers/soundlink-micro.html#v=soundlink_micro_black)
+
+To submit, share your challenge in the [slack channel](http://bit.ly/rockset-community-channel) in *#mongodb*.
+
+*Deadline: June 15, 2020*
+
+Check out below to see the status of the challenge or reach out for questions in our slack channel. The first 3 people to submit will win the appropriate prize.
+
+## Status of challenge
+Open
 
 ## Resources
-
 - For questions about the tutorial or the challenges find us on [slack](https://bit.ly/rockset-channel) on  **#support** channel or **#mongo**.
-- Follow us on Twitter: [Rockset](https://twitter.com/RocksetCloud).
-- Check out our [YouTube channel](https://www.youtube.com/channel/UCy4qLzJ7yuEmsIN2Mm5Pn-w)for tutorials.  We'll be making one for this integration, so stay tuned!
+- Follow us on Twitter: [Rockset]([https://twitter.com/RocksetCloud](https://twitter.com/RocksetCloud)).
+- Check out our [YouTube channel]([https://www.youtube.com/channel/UCy4qLzJ7yuEmsIN2Mm5Pn-w](https://www.youtube.com/channel/UCy4qLzJ7yuEmsIN2Mm5Pn-w)) for tutorials.  We'll be making one for this integration, so stay tuned!
