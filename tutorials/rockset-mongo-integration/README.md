@@ -47,5 +47,5 @@ Open
 
 ## Resources
 - For questions about the tutorial or the challenges find us on [slack](https://bit.ly/rockset-channel) on  **#support** channel or **#mongodb**.
-- Follow us on Twitter: [Rockset]([https://twitter.com/RocksetCloud](https://twitter.com/RocksetCloud)).
+- Follow us on Twitter: [Rockset](https://twitter.com/RocksetCloud).
 - Check out our [YouTube channel](https://www.youtube.com/channel/UCy4qLzJ7yuEmsIN2Mm5Pn-w) for tutorials.  We'll be making one for this integration, so stay tuned!
