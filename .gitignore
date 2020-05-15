@@ -70,3 +70,4 @@ typings/
 # tutorials
 community/tutorials/rockset-mongo-integration/__pycache__
 community/tutorials/rockset-mongo-integration/.DS_Store
+tutorials/rockset-mongo-integration/__pycache__/
