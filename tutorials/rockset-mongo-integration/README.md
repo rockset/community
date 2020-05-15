@@ -1,5 +1,5 @@
 # Rockset-MongoDB Integration Sample App
-Rockset has  a built-in data source connector to [Mongo DB]([https://www.mongodb.com/](https://www.mongodb.com/)).  By using Rockset on top of Mongo DB, you can build APIs to the SQL you write, have millisecond query latency, and seconds in data latency. To get a quick overview of what this integration looks like, check out this [YouTube video]([https://www.youtube.com/watch?v=eivdshBA-6g&t=1s](https://www.youtube.com/watch?v=eivdshBA-6g&t=1s).
+Rockset has  a built-in data source connector to [Mongo DB]([https://www.mongodb.com/](https://www.mongodb.com/)).  By using Rockset on top of Mongo DB, you can build APIs to the SQL you write, have millisecond query latency, and seconds in data latency. To get a quick overview of what this integration looks like, check out this [YouTube video](https://www.youtube.com/watch?v=eivdshBA-6g&t=1s).
 
 Here's a sample diagram of how the Rockset-MongoDB integration looks like:
 ![Rockset-MongoDB Diagram](mongo_horizontal_bgcolor_2x.png)
@@ -48,4 +48,4 @@ Open
 ## Resources
 - For questions about the tutorial or the challenges find us on [slack](https://bit.ly/rockset-channel) on  **#support** channel or **#mongodb**.
 - Follow us on Twitter: [Rockset]([https://twitter.com/RocksetCloud](https://twitter.com/RocksetCloud)).
-- Check out our [YouTube channel]([https://www.youtube.com/channel/UCy4qLzJ7yuEmsIN2Mm5Pn-w](https://www.youtube.com/channel/UCy4qLzJ7yuEmsIN2Mm5Pn-w)) for tutorials.  We'll be making one for this integration, so stay tuned!
+- Check out our [YouTube channel](https://www.youtube.com/channel/UCy4qLzJ7yuEmsIN2Mm5Pn-w)for tutorials.  We'll be making one for this integration, so stay tuned!
