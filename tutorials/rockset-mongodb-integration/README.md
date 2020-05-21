@@ -1,5 +1,8 @@
 # Rockset-MongoDB Integration Sample App
-Rockset has  a built-in data source connector to [Mongo DB]([https://www.mongodb.com/](https://www.mongodb.com/)).  By using Rockset on top of Mongo DB, you can build APIs to the SQL you write, have millisecond query latency, and seconds in data latency. To get a quick overview of what this integration looks like, check out this [YouTube video](https://www.youtube.com/watch?v=eivdshBA-6g&t=1s). Check out the [blog companion](https://rockset.com/blog/create-apis-for-aggregations-and-joins-on-mongodb-in-under-15-minutes/) to the video. 
+Rockset has  a built-in data source connector to [Mongo DB]([https://www.mongodb.com/](https://www.mongodb.com/)).  By using Rockset on top of Mongo DB, you can build APIs to the SQL you write, have millisecond query latency, and seconds in data latency. To get a quick overview of what this integration looks like, check out this [YouTube video](https://www.youtube.com/watch?v=eivdshBA-6g&t=1s).
+
+- The full [written tutorial](https://rockset.com/blog/create-apis-for-aggregations-and-joins-on-mongodb-in-under-15-minutes/) and and [companion video](https://www.youtube.com/watch?v=NNMxQU7LK7E) will walk you through the code here. 
+
 
 Here's a sample diagram of how the Rockset-MongoDB integration looks like:
 ![Rockset-MongoDB Diagram](mongo_horizontal_bgcolor_2x.png)
