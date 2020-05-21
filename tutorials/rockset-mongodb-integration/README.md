@@ -31,13 +31,13 @@ This project consists of a few files:
 - 2nd challenge: If we wanted to see the average humidity and PM10 and O3 levels, what would that look like?
 - 3rd challenge: If you were going to predict how weather and humidity effects PM10 and O3, what would that look like?
 
-If you completes challenges 1 or 2: $100 in rockset credit plus t-shirt
+If you complete challenges 1 or 2: $100 in rockset credit plus t-shirt
 
-If you completes challenges 1 and 2: $250  in rockset credit plus t-shirt
+If you complete challenges 1 and 2: $250  in rockset credit plus t-shirt
 
-If you completes challenge 3: $500 in rockset credit, hoodie, and a [bose soundlink](https://www.bose.com/en_us/products/speakers/portable_speakers/soundlink-micro.html#v=soundlink_micro_black)
+If you complete challenge 3: $500 in rockset credit, hoodie, and a [bose soundlink](https://www.bose.com/en_us/products/speakers/portable_speakers/soundlink-micro.html#v=soundlink_micro_black)
 
-If you completes all 3 challenges $800 in rockset credit, hoodie, and a [bose soundlink](https://www.bose.com/en_us/products/speakers/portable_speakers/soundlink-micro.html#v=soundlink_micro_black)
+If you complete all 3 challenges $800 in rockset credit, hoodie, and a [bose soundlink](https://www.bose.com/en_us/products/speakers/portable_speakers/soundlink-micro.html#v=soundlink_micro_black)
 
 To submit, share your challenge in the [slack channel](http://bit.ly/rockset-community-channel) in *#mongodb*.
 
