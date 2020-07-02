@@ -26,28 +26,6 @@ This project consists of a few files:
 4. Make sure your databases and collections are set up on Mongo DB.
 5. Run `$ python script.py`
 
-## Challenge
-- 1st challenge: So far, we’ve only considered PM10 in our queries. What would this look like for O3 and weather data?
-- 2nd challenge: If we wanted to see the average humidity and PM10 and O3 levels, what would that look like?
-- 3rd challenge: If you were going to predict how weather and humidity effects PM10 and O3, what would that look like?
-
-If you complete challenges 1 or 2: $100 in rockset credit plus t-shirt
-
-If you complete challenges 1 and 2: $250  in rockset credit plus t-shirt
-
-If you complete challenge 3: $500 in rockset credit, hoodie, and a [bose soundlink](https://www.bose.com/en_us/products/speakers/portable_speakers/soundlink-micro.html#v=soundlink_micro_black)
-
-If you complete all 3 challenges $800 in rockset credit, hoodie, and a [bose soundlink](https://www.bose.com/en_us/products/speakers/portable_speakers/soundlink-micro.html#v=soundlink_micro_black)
-
-To submit, share your challenge in the [slack channel](http://bit.ly/rockset-community-channel) in *#mongodb*.
-
-**Deadline: June 15, 2020**
-
-Check out below to see the status of the challenge or reach out for questions in our slack channel. The first 3 people to submit will win the appropriate prize.
-
-## Status of challenge
-Open
-
 ## Resources
 - For questions about the tutorial or the challenges find us on [slack](https://bit.ly/rockset-channel) on  **#support** channel or **#mongodb**.
 - Follow us on Twitter: [Rockset](https://twitter.com/RocksetCloud).
