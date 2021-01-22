@@ -2,16 +2,19 @@
 
 This subdirectory contains scripts to load the SSB 100SF dataset into Rockset and run the SSB queries against it.
 
+# Create a Rockset Profile
+
+Follow these instructions to download and install the Rockset CLI:
+[Rockset CLI Download and Install Instructions](https://github.com/rockset/rockset-js/tree/master/packages/cli#download--installation-instructions).
+
+Follow these instructions to set up a Rockset profile:
+[Authentication and Profile Management](https://github.com/rockset/rockset-js/tree/master/packages/cli#authentication-and-profile-management-rockset-auth).
+
 # Load
 
-Make sure you have the Rockset python client version >= 0.7.54 installed.
+Select the Rockset profile you want to use in the CLI.
 ```
-pip3 install 'rockset>=0.7.54'
-```
-
-Select the Rockset profile you want to use in the cli.
-```
-rock configure select PROFILE
+rockset auth:use NAME
 ```
 
 Create collection `denormalized` in workspace `commons` sourced from the denormalized ssb dataset corresponding to scale factor 100.
@@ -23,9 +26,9 @@ Create collection `denormalized` in workspace `commons` sourced from the denorma
 
 # Query
 
-Select the Rockset profile you want to use in the cli.
+Select the Rockset profile you want to use in the CLI.
 ```
-rock configure select PROFILE
+rockset auth:use NAME
 ```
 
 Run the queries
