@@ -57,7 +57,7 @@ field_types:
 - d_lastdayinmonthfl::bool
 - d_holidayfl::bool
 - d_weekdayfl::bool
-field_partitions:
+clustering_key:
 - d_year
 - s_region
 - c_region

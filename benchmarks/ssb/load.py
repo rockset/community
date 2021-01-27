@@ -27,7 +27,7 @@ def create_collection(args):
     with open(args.schema, 'r') as f:
         schema = yaml.full_load(f)
         field_types = schema['field_types']
-        partitions = schema.get('field_partitions')
+        clustering_fields = schema.get('clustering_key')
     column_names, column_types = get_columns(field_types)
     format_params = rs.Source.csv_params(
         separator=args.separator,
@@ -44,16 +44,16 @@ def create_collection(args):
         )
     ]
 
-    if partitions:
-        field_partitions = [
-            rs.FieldPartition.partition(field_name=p, partition_type='AUTO')
-            for p in partitions
+    if clustering_fields:
+        clustering_key = [
+            rs.ClusteringKey.clusteringField(field_name=cf, cluster_type='AUTO')
+            for cf in clustering_fields
         ]
         rs.Collection.create(
             name=args.collection,
             workspace=args.workspace,
             sources=sources,
-            field_partitions=field_partitions
+            clustering_key=clustering_key
         )
     else:
         rs.Collection.create(

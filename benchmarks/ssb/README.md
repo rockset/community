@@ -22,7 +22,7 @@ Create collection `denormalized` in workspace `commons` sourced from the denorma
 ./load.py -c denormalized --s3-bucket=rockset-public-datasets --s3-prefix=ssb-denormalized-100GB/ --schema schema.yml
 ```
 
-> Note: You will need to have field partitioning enabled for your organization for this to work. If during creation you get an error that it is not, contact support so we can enable it for you.
+> Note: You will need to have clustering enabled for your organization for this to work. If during creation you get an error that it is not, contact support so we can enable it for you.
 
 # Query
 
