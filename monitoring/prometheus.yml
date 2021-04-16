@@ -1,0 +1,28 @@
+# Prometheus configuration for Rockset
+#
+# Run with:
+# $ prometheus -config.file=prometheus.yml
+
+global:
+  scrape_interval: 1m
+
+rule_files:
+- "rules/alerts.rules.yml"
+
+# Alert manager
+alerting:
+  alertmanagers:
+  - path_prefix: "/alertmanager/"
+    static_configs:
+    - targets:
+      - localhost:9093
+
+scrape_configs:
+- job_name: 'rockset-metrics-endpoint'
+  scheme: https
+  metrics_path: '/v1/orgs/self/metrics'
+  basic_auth:
+    username: '{{ apikey }}'
+    password: ''
+  static_configs:
+  - targets: ['api.rs2.usw2.rockset.com']
