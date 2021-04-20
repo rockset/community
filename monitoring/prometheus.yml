@@ -1,7 +1,7 @@
 # Prometheus configuration for Rockset
 #
 # Run with:
-# $ prometheus -config.file=prometheus.yml
+# $ prometheus --config.file=prometheus.yml
 
 global:
   scrape_interval: 1m
