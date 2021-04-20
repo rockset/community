@@ -1,0 +1,56 @@
+groups:
+- name: rules/alerts.rules
+  rules:
+  # Alerts for high leaf / aggregator CPU / memory
+  - alert: RocksetHighLeafCPU
+    expr: rockset_leaf_cpu_utilization_percentage > 0.80
+    for: 2m
+    labels:
+      severity: page
+    annotations:
+      summary: Rockset Leaf CPU usage above 80% (virtual instance {{ $labels.virtual_instance_id }})
+  - alert: RocksetHighLeafMemory
+    expr: rockset_leaf_memory_utilization_percentage > 0.90
+    for: 2m
+    labels:
+      severity: page
+    annotations:
+      summary: Rockset Leaf Memory usage above 90% (virtual instance {{ $labels.virtual_instance_id }})
+  - alert: RocksetHighAggCPU
+    expr: rockset_agg_cpu_utilization_percentage > 0.80
+    for: 2m
+    labels:
+      severity: page
+    annotations:
+      summary: Rockset Aggregator CPU usage above 80% (virtual instance {{ $labels.virtual_instance_id }})
+  - alert: RocksetHighAggMemory
+    expr: rockset_agg_memory_utilization_percentage > 0.90
+    for: 2m
+    labels:
+      severity: page
+    annotations:
+      summary: Rockset Aggregator Memory usage above 90% (virtual instance {{ $labels.virtual_instance_id }})
+  # Alert for 5XX errors
+  - alert: Rockset500QueryErrors
+    expr: sum by (virtual_instance_id) (increase(rockset_query_errors{error_code=~"5.*"}[1h])) > 1.1
+    labels:
+      severity: page
+    annotations:
+      summary: Rockset returned multiple 500s last 1 hour (virtual instance {{ $labels.virtual_instance_id }})
+      description: Rockset returned multiple 500s last 1 hour (virtual instance {{ $labels.virtual_instance_id }}). If this continues to increase please reach out to support.
+  # Sample alert for a particular Query Lambda latency - in this case, P95 > 300ms
+  - alert: RocksetHighQueryLambdaLatencyGetCustomer
+    expr: histogram_quantile(0.95, sum(rate(rockset_query_lambda_latency_seconds_bucket{query_lambda="GetCustomer", tag="production",workspace_name="my_workspace"}[5m])) by (le)) > 0.3
+    for: 5m
+    labels:
+      severity: page
+    annotations:
+      summary: P95 request latency high for (query_lambda {{ $labels.query_lambda }} - tag {{ $labels.tag }} )
+  # Alert for data latency over 10m (sum discovery latency and process latency)
+  - alert: RocksetHighDataLatencyCustomers
+    expr: histogram_quantile(0.95, sum(rate(rockset_collection_data_discovery_latency_seconds_bucket{collection_name="customers", workspace_name="my_workspace"}[5m])) by (le)) + histogram_quantile(0.95, sum(rate(rockset_collection_data_process_latency_seconds_bucket{collection_name="customers", workspace_name="my_workspace"}[5m])) by (le)) > 600.0
+    for: 5m
+    labels:
+      severity: page
+    annotations:
+      summary: P95 combined data latency high for (collection {{ $labels.collection_name }} - workspace {{ $labels.workspace_name }} )

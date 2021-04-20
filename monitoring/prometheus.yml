@@ -7,12 +7,12 @@ global:
   scrape_interval: 1m
 
 rule_files:
-- "rules/alerts.rules.yml"
+- 'rules/alerts.rules.yml'
 
 # Alert manager
 alerting:
   alertmanagers:
-  - path_prefix: "/alertmanager/"
+  - path_prefix: '/alertmanager/'
     static_configs:
     - targets:
       - localhost:9093
@@ -26,3 +26,4 @@ scrape_configs:
     password: ''
   static_configs:
   - targets: ['api.rs2.usw2.rockset.com']
+# add additional jobs for each org / region
