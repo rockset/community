@@ -1,0 +1,13 @@
+init_config:
+  service: rockset
+
+instances:
+  - openmetrics_endpoint: https://api.rs2.usw2.rockset.com/v1/orgs/self/metrics
+    ### make sure the api endpoint matches your region's endpoint url
+    namespace: rockset
+    auth_type: basic
+    username: <api_key>
+    password: ""
+    ### password must be an empty string as shown above
+    metrics:
+      - .+
