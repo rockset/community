@@ -1,0 +1,12 @@
+SELECT
+    count(orders) AS NumOrders,
+    zipcode
+FROM
+    ${workspace}.${collection} as o
+WHERE
+    ${join(" OR ", formatlist("state = '%s'", states))}
+GROUP BY
+    orders,
+    zipcode
+ORDER BY
+    orders DESC

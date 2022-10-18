@@ -1,6 +1,7 @@
 node_modules
 dist
 .vscode
+.idea
 **/.DS_Store
 
 # Logs
@@ -71,3 +72,10 @@ typings/
 community/tutorials/rockset-mongo-integration/__pycache__
 community/tutorials/rockset-mongo-integration/.DS_Store
 tutorials/rockset-mongo-integration/__pycache__/
+
+# terraform
+.envrc
+.terraform
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.backup
