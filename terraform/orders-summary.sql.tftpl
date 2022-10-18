@@ -1,0 +1,11 @@
+SELECT
+    count(orders) AS NumOrders,
+    zipcode
+FROM
+    ${workspace}.${collection} as o
+WHERE
+    state = 'State_42' OR state = 'State_43'
+GROUP BY
+    zipcode
+ORDER BY
+    orders DESC
