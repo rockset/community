@@ -3,8 +3,8 @@ SELECT
     SUM(i.orderunits) AS units,
     i.address.zipcode,
     i.address.state,
-    -- bucket data in one hour buckets
-    TIME_BUCKET(HOURS(1), TIMESTAMP_MILLIS(i.ordertime)) AS _event_time
+    -- bucket data in five minute buckets
+    TIME_BUCKET(MINUTES(5), TIMESTAMP_MILLIS(i.ordertime)) AS _event_time
 FROM
     _input AS i
 WHERE

@@ -43,8 +43,8 @@ resource rockset_s3_integration public {
 
 resource rockset_s3_collection cities {
   description = "This collection contains sample data from the Rockset public dataset from S3"
-  workspace = rockset_workspace.community.name
-  name      = "cities"
+  workspace   = rockset_workspace.community.name
+  name        = "cities"
 
   source {
     integration_name = rockset_s3_integration.public.name
@@ -75,7 +75,7 @@ resource rockset_api_key query-only {
   role = rockset_role.query-only.name
 }
 
-resource rockset_query_lambda order-summary {
+resource rockset_query_lambda orders-summary {
   name      = "orders-summary"
   workspace = rockset_workspace.community.name
   sql {
@@ -83,6 +83,7 @@ resource rockset_query_lambda order-summary {
       {
         workspace  = rockset_workspace.community.name,
         collection = rockset_alias.production.name
+        states     = var.states
       })
   }
 }
@@ -90,8 +91,8 @@ resource rockset_query_lambda order-summary {
 resource "rockset_query_lambda_tag" "production" {
   workspace    = rockset_workspace.community.name
   name         = "production"
-  query_lambda = rockset_query_lambda.order-summary.name
-  version      = var.production_version == "" ? rockset_query_lambda.order-summary.version : var.production_version
+  query_lambda = rockset_query_lambda.orders-summary.name
+  version      = var.production_version == "" ? rockset_query_lambda.orders-summary.version : var.production_version
 }
 
 resource rockset_view state {
@@ -103,5 +104,6 @@ resource rockset_view state {
     {
       workspace  = rockset_workspace.community.name,
       collection = rockset_alias.production.name,
+      state      = var.states[count.index]
     })
 }

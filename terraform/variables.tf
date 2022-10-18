@@ -1,12 +1,12 @@
 variable "states" {
   description = "States to generate views for"
   type = list(string)
-  default = ["state_24", "state_42"]
+  default = ["state_24", "state_42", "state_49"]
 }
 
 variable "production_version" {
   description = "Query lambda version used for the production tag. If left blank the latest version of the query lambda is used."
-  default = "71cecbbf2d0a7cdc"
+  default = "6c7451cc23bdc1b8"
 }
 
 variable "KAFKA_REST_ENDPOINT" {

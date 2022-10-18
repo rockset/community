@@ -4,8 +4,9 @@ SELECT
 FROM
     ${workspace}.${collection} as o
 WHERE
-    state = 'State_42' OR state = 'State_43'
+    ${join(" OR ", formatlist("state = '%s'", states))}
 GROUP BY
+    orders,
     zipcode
 ORDER BY
     orders DESC
