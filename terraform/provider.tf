@@ -1,4 +1,12 @@
 terraform {
+  cloud {
+    organization = "rockset-community"
+
+    workspaces {
+      name = "community"
+    }
+  }
+
   required_providers {
     rockset = {
       source  = "rockset/rockset"
@@ -11,4 +19,3 @@ terraform {
   }
   required_version = "~>1.3"
 }
-
