@@ -26,7 +26,7 @@ resource rockset_kafka_collection orders {
     topic_name          = "test_json"
     offset_reset_policy = "EARLIEST"
   }
-  field_mapping_query = file("ingest-transformation.sql")
+  field_mapping_query = file("sql/ingest-transformation.sql")
 }
 
 resource rockset_alias production {
@@ -42,6 +42,7 @@ resource rockset_s3_integration public {
 }
 
 resource rockset_s3_collection cities {
+  description = "This collection contains sample data from the Rockset public dataset from S3"
   workspace = rockset_workspace.community.name
   name      = "cities"
 
@@ -78,7 +79,7 @@ resource rockset_query_lambda order-summary {
   name      = "orders-summary"
   workspace = rockset_workspace.community.name
   sql {
-    query = templatefile("orders-summary.sql.tftpl",
+    query = templatefile("sql/orders-summary.sql.tftpl",
       {
         workspace  = rockset_workspace.community.name,
         collection = rockset_alias.production.name
@@ -98,7 +99,7 @@ resource rockset_view state {
   name        = var.states[count.index]
   description = "limit the view of the data to ${var.states[count.index]}"
   workspace   = rockset_workspace.community.name
-  query       = templatefile("view.sql.tftpl",
+  query       = templatefile("sql/view.sql.tftpl",
     {
       workspace  = rockset_workspace.community.name,
       collection = rockset_alias.production.name,
