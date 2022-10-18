@@ -93,11 +93,12 @@ resource "rockset_query_lambda_tag" "production" {
   version      = var.production_version == "" ? rockset_query_lambda.order-summary.version : var.production_version
 }
 
-resource rockset_view state-42 {
-  name      = "state_42"
-  description = "limit the view of the data to state_42"
-  workspace = rockset_workspace.community.name
-  query     = templatefile("view.sql.tftpl",
+resource rockset_view state {
+  count       = length(var.states)
+  name        = var.states[count.index]
+  description = "limit the view of the data to ${var.states[count.index]}"
+  workspace   = rockset_workspace.community.name
+  query       = templatefile("view.sql.tftpl",
     {
       workspace  = rockset_workspace.community.name,
       collection = rockset_alias.production.name,

@@ -1,3 +1,9 @@
+variable "states" {
+  description = "States to generate views for"
+  type = list(string)
+  default = ["state_24", "state_42"]
+}
+
 variable "production_version" {
   description = "Query lambda version used for the production tag. If left blank the latest version of the query lambda is used."
   default = "71cecbbf2d0a7cdc"
