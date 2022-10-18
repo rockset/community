@@ -23,19 +23,23 @@ jobs:
       - name: Terraform Format
         id: fmt
         run: terraform fmt -check
+        working-directory: terraform
 
       - name: Terraform Init
         id: init
         run: terraform init
+        working-directory: terraform
       
       - name: Terraform Validate
         id: validate
         run: terraform validate -no-color
+        working-directory: terraform
 
       - name: Terraform Plan
         id: plan
         if: github.event_name == 'pull_request'
         run: terraform plan -no-color -input=false
+        working-directory: terraform
         continue-on-error: true
 
       - uses: actions/github-script@v6
@@ -66,6 +70,7 @@ jobs:
               repo: context.repo.repo,
               body: output
             })
+          working-directory: terraform
 
       - name: Terraform Plan Status
         if: steps.plan.outcome == 'failure'
@@ -74,3 +79,4 @@ jobs:
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply -auto-approve -input=false
+        working-directory: terraform
