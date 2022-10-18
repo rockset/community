@@ -6,7 +6,7 @@ variable "states" {
 
 variable "production_version" {
   description = "Query lambda version used for the production tag. If left blank the latest version of the query lambda is used."
-  default = "6c7451cc23bdc1b8"
+  default = ""
 }
 
 variable "KAFKA_REST_ENDPOINT" {
