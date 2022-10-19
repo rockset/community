@@ -107,3 +107,14 @@ resource "rockset_view" "state" {
       state      = var.states[count.index]
   })
 }
+
+resource "rockset_query_lambda" "cities-by-country" {
+  name      = "cities-by-country"
+  workspace = rockset_workspace.community.name
+  sql {
+    query = file("sql/cities.sql")
+  }
+  # this needs an explicit depends_on as only the SQL references the collection
+  # so terraform has no way of knowing which resource it depends on
+  depends_on = [rockset_s3_collection.cities]
+}
