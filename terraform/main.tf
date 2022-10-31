@@ -18,7 +18,6 @@ resource "rockset_kafka_collection" "orders" {
   workspace      = rockset_workspace.community.name
   description    = "Ingestion of sample data from Confluent Cloud."
   retention_secs = 3600
-  insert_only    = true
 
   source {
     integration_name    = rockset_kafka_integration.confluent.name
