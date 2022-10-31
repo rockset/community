@@ -6,4 +6,4 @@ FROM
 GROUP BY
     country
 ORDER by
-    cities DESC
+    cities
