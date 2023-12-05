@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Draw Polygon and Get WKT</title>
+
+    <!-- Include Leaflet CSS and JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
+
+    <!-- Include Cloudflare CDN CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/0.4.2/leaflet.draw.js"></script>
+
+    <style>
+      .stacked-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+      }
+    </style>
+
+</head>
+<body>
+
+  <div id="map" style="width: 100%; height: 500px"></div>
+  <br>
+  <label for="distanceInput" style="font-weight: bold">Enter Distance:</label>
+  <input type="text" id="distanceInput" name="distanceInput" placeholder="Type distance in meters">
+  <button onclick="spatialSearch()">Search</button>
+  <button onclick="deleteResults()">Clear Results</button>
+  <br><br>
+  <div style="display: flex;">
+      <div class="stacked-group" style="margin-right: 10px;">
+          <label for="wkt-polygon-string">
+              <span style="font-weight: bold">Polygon WKT</span>
+              <span style="font-weight: normal">(for ST_Contains)</span>:
+          </label>
+          <textarea id="wkt-polygon-string" style="width: 25vw;height: 200px;"></textarea>
+      </div>
+      <div class="stacked-group" style="margin-right: 10px;">
+          <label for="wkt-distance-string">
+              <span style="font-weight: bold">Distance WKT</span>
+              <span style="font-weight: normal">(for ST_Distance)</span>:
+          </label>
+          <textarea id="wkt-distance-string" style="width: 25vw;height: 200px;"></textarea>
+      </div>
+      <div class="stacked-group">
+          <label for="results" style="font-weight: bold">Results:</label>
+          <textarea id="results" style="width: 45vw; height: 200px;"></textarea>
+      </div>
+  </div>
+</body>
+
+<script>
+
+    // Initialize map layers
+    var osm = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '© OpenStreetMap'}),
+        gmaps = L.tileLayer('http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}', {attribution: '© Google'});
+
+    // Initialize map
+    var map = L.map('map', {
+        center: [37.7749, -122.4194],
+        zoom: 13,
+        layers: [osm] // default layer on osm
+    });
+
+    // initialize controls
+    var drawnItems = new L.FeatureGroup();
+    map.addLayer(drawnItems);
+
+    L.control.layers(
+        {'osm': osm, 'gmaps': gmaps},
+        {'drawlayer': drawnItems},
+        {position: 'topleft', collapsed: false}
+    ).addTo(map);
+
+    var resultsLayer = L.layerGroup().addTo(map);
+
+    var drawControlGreen = new L.Control.Draw({
+        draw: {
+            polygon: {
+                showArea: true,
+                shapeOptions: {
+                  color: 'green',
+                  fillColor: 'green'
+                }
+            },
+            marker: false,
+            polyline: false,
+            circle: false,
+            rectangle: false
+        }
+    }); 
+    map.addControl(drawControlGreen); // only Polygons can be green (green shapes used for ST_CONTAINS)
+
+    var drawControlRed = new L.Control.Draw({
+        draw: {
+            polygon: {
+                showArea: true,
+                shapeOptions: {
+                  color: 'red',
+                  fillColor: 'red'
+                }
+            },
+            marker: false,
+            polyline: false,
+            circle: false,
+            rectangle: false
+        }
+    });
+    map.addControl(drawControlRed); // only Polygons can be red (red shapes used for NOT in ST_CONTAINS)
+
+    var drawControlBlue = new L.Control.Draw({
+        edit: {
+            featureGroup: drawnItems
+        },
+        draw: {
+            polygon: {
+                showArea: true,
+                shapeOptions: {
+                  color: 'blue',
+                  fillColor: 'blue'
+                }
+            },
+            marker: {
+              shapeOptions: {
+                  color: 'blue',
+                  fillColor: 'blue'
+                }
+            },
+            polyline: {
+              shapeOptions: {
+                  color: 'blue',
+                  fillColor: 'blue'
+                }
+            },
+            circle: false,
+            rectangle: false
+        }
+    });
+    map.addControl(drawControlBlue); // blue shapes used for ST_DISTANCE
+
+    // Event triggered when a new layer is created
+    map.on('draw:created', function (e) {
+        var layer = e.layer;
+        drawnItems.addLayer(layer);
+        updateWKT();
+    });
+
+    // Event triggered when a layer is edited
+    map.on('draw:edited', function () {
+        updateWKT();
+    });
+
+    // Event triggered when a layer is deleted
+    map.on('draw:deleted', function () {
+        updateWKT();
+    });
+
+    function updateWKT() {
+        var layers = drawnItems.getLayers();
+        var wktPolygon = [];
+        var wktDistance = [];
+
+        layers.forEach(function (layer) {
+            if (layer instanceof L.Polygon) {
+                var latLngs = layer.getLatLngs()[0]; // Access the outer ring of the polygon
+                var coordinates = [];
+
+                for (var i = 0; i < latLngs.length; i=i+2) {
+                    coordinates.push(latLngs[i].lng + ' ' + latLngs[i].lat);
+                }
+
+                if (layer.options.color === 'green') {
+                    wktPolygon.push('(' + coordinates.join(',') + ')');
+                } else if (layer.options.color === 'red') {
+                    wktPolygon.push(wktPolygon.pop() + ',(' + coordinates.join(',') + ')');
+                } else if (layer.options.color === 'blue') {
+                    wktDistance.push('POLYGON((' + coordinates.join(',') + '))');
+                }
+
+            } else if (layer instanceof L.Marker) {
+                var latLng = layer.getLatLng()
+                wktDistance.push('POINT(' + latLng.lng + ' ' + latLng.lat + ')');
+            } else if (layer instanceof L.Polyline) {
+                var latLngs = layer.getLatLngs();
+                var coordinates = [];
+
+                for (var i = 0; i < latLngs.length; i=i+2) {
+                    coordinates.push(latLngs[i].lng + ' ' + latLngs[i].lat);
+                }
+                wktDistance.push('LINESTRING(' + coordinates.join(',') + ')');
+            }
+            
+        });
+
+        if (wktPolygon.length === 1) {
+            document.getElementById('wkt-polygon-string').value = 'POLYGON(' + wktPolygon.join(',') + ')';
+        } else if (wktPolygon.length > 1) {
+            document.getElementById('wkt-polygon-string').value = 'MULTIPOLYGON((' + wktPolygon.join('),(') + '))';
+        }
+
+        document.getElementById('wkt-distance-string').value = wktDistance;
+    }
+
+    function deleteResults() {
+        resultsLayer.clearLayers();
+    }
+
+    async function spatialSearch() {
+        const wktPolygonString = document.getElementById('wkt-polygon-string').value;
+        const wktDistanceString = document.getElementById('wkt-distance-string').value;
+        const distanceMeters = document.getElementById('distanceInput').value;
+
+        if (wktDistanceString && !distanceMeters) {
+            document.getElementById('results').value = 'Enter a distance & try again.';
+            return;
+        }
+
+        var parameters = [];
+
+        if (wktPolygonString && wktDistanceString) {
+            parameters = [
+                { "name": "containsSearch", "type": "bool", "value": true },
+                { "name": "distanceSearch", "type": "bool", "value": true },
+                { "name": "wktContains", "type": "string", "value": wktPolygonString },
+                { "name": "wktDistance", "type": "string", "value": wktDistanceString },
+                { "name": "distanceMeters", "type": "float", "value": distanceMeters }
+            ];
+        } else if (wktPolygonString) {
+            parameters = [
+                { "name": "containsSearch", "type": "bool", "value": true },
+                { "name": "distanceSearch", "type": "bool", "value": false },
+                { "name": "wktContains", "type": "string", "value": wktPolygonString }
+            ];
+        } else if (wktDistanceString) {
+            parameters = [
+                { "name": "containsSearch", "type": "bool", "value": false },
+                { "name": "distanceSearch", "type": "bool", "value": true },
+                { "name": "wktDistance", "type": "string", "value": wktDistanceString },
+                { "name": "distanceMeters", "type": "float", "value": distanceMeters }
+            ];
+        }
+
+        const apikey = "YOUR_ROCKSET_API_KEY";
+        const apiserverURL = "YOUR_ROCKSET_REGION_URL" // ex: "https://api.usw2a1.rockset.com"
+        const response = await fetch(apiserverURL + '/v1/orgs/self/ws/airbnb/lambdas/airbnbSearch/tags/latest', {
+            method: 'POST',
+            headers: {
+                'Authorization': 'ApiKey ' + apikey,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ 'parameters': parameters })
+        });
+
+        const data = await response.json();
+        deleteResults();
+
+        if (JSON.stringify(data.error_id)) {
+            document.getElementById('results').value = JSON.stringify(data.message + '\n\n' + parameters);
+        } else {
+            document.getElementById('results').value = JSON.stringify(data.results);
+
+            data.results.forEach(record => {
+                const marker = L.marker([record.latitude, record.longitude]).addTo(resultsLayer);
+                marker.bindPopup(`<b>${record.name}</b><br>${record.address}`).openPopup();
+            });
+        }
+    }
+
+</script>
+
+</body>
+</html>
