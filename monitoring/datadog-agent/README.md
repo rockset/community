@@ -17,6 +17,8 @@ The syntax is very specific and please note any differences between your file an
 
 You can import the sample dashboard into your Datadog account by following the instructions here: https://docs.datadoghq.com/dashboards/#copy-import-or-export-dashboard-json
 
+![image](https://github.com/lukalovosevic/community/assets/62242783/850dd6a2-f9d8-444a-9faa-7ecea01b6268)
+
 ## References
 - https://rockset.com/docs/monitoring-and-alerting/
 - https://docs.datadoghq.com/integrations/openmetrics/
