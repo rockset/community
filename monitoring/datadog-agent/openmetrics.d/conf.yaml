@@ -2,10 +2,32 @@ init_config:
   service: rockset
 
 instances:
-  - openmetrics_endpoint: https://api.rs2.usw2.rockset.com/v1/orgs/self/metrics
+  - openmetrics_endpoint: https://api.usw2a1.rockset.com/v1/orgs/self/metrics
     ### make sure the api endpoint matches your region's endpoint url
     namespace: rockset
     extra_headers:
-        authorization: Apikey <api_key>
+        authorization: Apikey <your_api_key_here>
+    max_returned_metrics: 50000
     metrics:
-      - .+
+      - rockset_leaf_cpu_utilization_percentage
+      - rockset_leaf_memory_utilization_percentage
+      - rockset_agg_cpu_utilization_percentage
+      - rockset_agg_memory_utilization_percentage
+      - rockset_collections
+      - rockset_collection_size_bytes
+      - rockset_collection_documents
+      - rockset_collection_total_ingest_bytes
+      - rockset_collection_parse_errors
+      - rockset_collection_data_discovery_latency
+      - rockset_collection_data_process_latency
+      - rockset_data_discovery_latency
+      - rockset_data_process_latency
+      - rockset_queries
+      - rockset_query_latency_seconds
+      - rockset_query_admission_latency_seconds
+      - rockset_query_queue_size
+      - rockset_query_errors
+      - rockset_query_lambda_queries
+      - rockset_query_lambda_latency_seconds
+      - rockset_query_lambda_admission_latency_seconds
+      - rockset_query_lambda_errors
